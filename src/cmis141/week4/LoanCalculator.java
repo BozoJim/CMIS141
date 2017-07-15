@@ -49,6 +49,7 @@ public class LoanCalculator {
 
     public void setLoanTermInYears(int loanTermInYears) {
         this.loanTermInYears = loanTermInYears;
+        this.loanTermInMonths = loanTermInYears * 12;
     }
 
     // Loan Term in Months
@@ -56,8 +57,9 @@ public class LoanCalculator {
         return loanTermInMonths;
     }
 
-    public void setLoanTermInMonths(int loanTermInYears) {
-        this.loanTermInMonths = loanTermInYears * 12;
+    public void setLoanTermInMonths(int loanTermInMonths) {
+        this.loanTermInMonths = loanTermInMonths;
+        this.loanTermInYears = loanTermInMonths / 12;
     }
 
     public double getInterestRate() {
@@ -71,8 +73,7 @@ public class LoanCalculator {
     // calculate monthly payments
     private double monthlyPayment(int loanAmount, int loanTermInMonths, double interestRate) {
         double monthlyRate = interestRate / 12;
-        double monthlyPayment = (loanAmount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -loanTermInMonths));
-        return monthlyPayment;
+        return (loanAmount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -loanTermInMonths));
     }
 
     // calculate total paid after all payments.
