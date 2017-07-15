@@ -12,10 +12,22 @@ class LoanCalculatorTest {
 
     private double delta = 0.001;
     private LoanCalculator testCase1 = new LoanCalculator(50000, 6, 0.03);
+    private LoanCalculator myCarLoan = new LoanCalculator(30000, 6, 0.065);
+    private LoanCalculator myHomeLoan = new LoanCalculator(375000, 30, 0.0375);
 
     @Test
     void testCaseOne() {
-        System.out.println(testCase1.toString());
+        System.out.println("testCase1: " + testCase1.toString());
+    }
+
+    @Test
+    void testCaseTwo() {
+        System.out.println("myCarLoan: " + myCarLoan.toString());
+    }
+
+    @Test
+    void testCaseThree() {
+        System.out.println("myHomeLoan: " + myHomeLoan.toString());
     }
 
     @Test

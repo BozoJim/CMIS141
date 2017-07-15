@@ -1,5 +1,7 @@
 package cmis141.week4;
 
+import java.text.NumberFormat;
+
 /*  File:    LoanCalculator.java
  *  Author:  Stokes, James
  *  Date:    7/10/2017
@@ -23,13 +25,17 @@ public class LoanCalculator {
     // toString that will display the useful information.
     @Override
     public String toString() {
+        NumberFormat nf = NumberFormat.getInstance();
+        nf.setGroupingUsed(true);
+        nf.setMaximumFractionDigits(2);
+
         return "LoanCalculator{" +
-                "loanAmount=" + loanAmount +
+                "loanAmount=$" + nf.format(loanAmount) +
                 ", loanTermInYears=" + loanTermInYears +
                 ", loanTermInMonths=" + loanTermInMonths +
-                ", interestRate=" + interestRate +
-                ", monthlyPayment=" + monthlyPayment +
-                ", totalAmount=" + totalAmount +
+                ", interestRate=" + (interestRate * 100) + "%" +
+                ", monthlyPayment=$" + nf.format(monthlyPayment) +
+                ", totalAmount=$" + nf.format(totalAmount) +
                 '}';
     }
 
