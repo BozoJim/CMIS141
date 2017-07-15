@@ -25,6 +25,7 @@ public class LoanCalculator {
     // toString that will display the useful information.
     @Override
     public String toString() {
+        // format numbers to to always be in the ##,###.## format
         NumberFormat nf = NumberFormat.getInstance();
         nf.setGroupingUsed(true);
         nf.setMaximumFractionDigits(2);
