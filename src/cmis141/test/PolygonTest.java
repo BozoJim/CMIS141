@@ -1,16 +1,28 @@
 package cmis141.test;
 
+/*  File:    PolygonTest.java
+ *  Author:  Stokes, James
+ *  Date:    7/11/2017
+ *  Purpose: This class test every method in Polygon.java to ensure the expected output.
+ */
+
+// class and junit imports
+
 import cmis141.week4.homework2.Polygon;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * Created by 590905 on 7/10/2017.
+ * Polygon Test Cases
  */
-public class PolygonTest {
 
-    double delta = 0.001;
+class PolygonTest {
+
+    // initialize acceptable error
+    private double delta = 0.001;
+
+    // construct new polygon for each test case as well as a default no-argument
     private Polygon defaultTest = new Polygon();
     private Polygon testCase1 = new Polygon();
     private Polygon testCase2 = new Polygon(3, 3.0, 3.0, 3.0);
@@ -19,7 +31,7 @@ public class PolygonTest {
     private Polygon testCase5 = new Polygon(27, 27.456, 27.456, -27.456);
 
     @Test
-    public void testCaseOne() throws Exception {
+    void testCaseOne() throws Exception {
         // Test case 1 (Default): numSides=4, sideLength=5.0, xCoord=1.0, yCoord=1.0
         System.out.println("Test Case 1: numSides=4, sideLength=5.0, xCoord=1.0, yCoord=1.0");
 
@@ -43,7 +55,7 @@ public class PolygonTest {
     }
 
     @Test
-    public void testCaseTwo() throws Exception {
+    void testCaseTwo() throws Exception {
         // Test case 2: numSides=3, sideLength=3.0, xCoord=3.0, yCoord=3.0
         System.out.println("Test Case 2: numSides=3, sideLength=3.0, xCoord=5.0, yCoord=5.0");
 
@@ -67,7 +79,7 @@ public class PolygonTest {
     }
 
     @Test
-    public void testCaseThree() throws Exception {
+    void testCaseThree() throws Exception {
         // Test case 3: numSides=5, sideLength=5.1, xCoord=5.1, yCoord=5.1
         System.out.println("Test Case 3: numSides=5, sideLength=5.0, xCoord=5.0, yCoord=5.0");
 
@@ -91,7 +103,7 @@ public class PolygonTest {
     }
 
     @Test
-    public void testCaseFour() throws Exception {
+    void testCaseFour() throws Exception {
         // Test case 4: numSides=7, sideLength=7.89, xCoord=7.89, yCoord=7.89
         System.out.println("Test Case 4: numSides=7, sideLength=7.89, xCoord=7.89, yCoord=7.89");
 
@@ -115,7 +127,7 @@ public class PolygonTest {
     }
 
     @Test
-    public void testCaseFive() throws Exception {
+    void testCaseFive() throws Exception {
         // Test case 4: numSides=27, sideLength=7.89, xCoord=7.89, yCoord=7.89
         System.out.println("Test Case 5: numSides=27, sideLength=27.456, xCoord=27.456, yCoord=-27.456");
 
@@ -140,25 +152,25 @@ public class PolygonTest {
 
     // NumSides
     @Test
-    public void setNumSides() throws Exception {
+    void setNumSides() throws Exception {
         defaultTest.setNumSides(4);
         assertEquals(4, defaultTest.getNumSides());
     }
 
     @Test
-    public void getNumSides() throws Exception {
+    void getNumSides() throws Exception {
         assertEquals(4, defaultTest.getNumSides());
     }
 
     // SideLength
     @Test
-    public void setSideLength() throws Exception {
+    void setSideLength() throws Exception {
         defaultTest.setSideLength(5.0);
         assertEquals(5.0, defaultTest.getSideLength(), delta);
     }
 
     @Test
-    public void getSideLength() throws Exception {
+    void getSideLength() throws Exception {
         // Test case 1: Default
         assertEquals(5, defaultTest.getSideLength(), delta);
         // Test case 2: sideLength = 3
@@ -176,39 +188,39 @@ public class PolygonTest {
 
     // x-coord
     @Test
-    public void setxCoord() throws Exception {
+    void setxCoord() throws Exception {
         defaultTest.setyCoord(1.0);
         assertEquals(1.0, defaultTest.getyCoord(), delta);
     }
 
     @Test
-    public void getxCoord() throws Exception {
+    void getxCoord() throws Exception {
         assertEquals(1.0, defaultTest.getxCoord(), delta);
     }
 
     // y-Coord
     @Test
-    public void setyCoord() throws Exception {
+    void setyCoord() throws Exception {
         defaultTest.setyCoord(1.0);
         assertEquals(1.0, defaultTest.getyCoord(), delta);
     }
 
     @Test
-    public void getyCoord() throws Exception {
+    void getyCoord() throws Exception {
         assertEquals(1.0, defaultTest.getyCoord(), delta);
     }
 
     // Perimeter
     @Test
-    public void setPerimeter() throws Exception {
+    void setPerimeter() throws Exception {
         defaultTest.setNumSides(6);
         defaultTest.setSideLength(6.0);
         assertEquals(36.0, defaultTest.getPerimeter(), delta);
     }
 
     @Test
-    public void getPerimeter() throws Exception {
+    void getPerimeter() throws Exception {
         assertEquals(20, defaultTest.getPerimeter(), 0.001);
     }
 
-}
+} // end PolygonTest

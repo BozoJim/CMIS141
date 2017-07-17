@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/CMIS141 Git.iml" filepath="$PROJECT_DIR$/.idea/CMIS141 Git.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CMIS141 Git.iml" filepath="$PROJECT_DIR$/CMIS141 Git.iml" />
     </modules>
   </component>
 </project>
