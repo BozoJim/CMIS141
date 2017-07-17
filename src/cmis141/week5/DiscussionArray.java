@@ -95,7 +95,7 @@ public class DiscussionArray {
         DiscussionArray testOne = new DiscussionArray(new int[]{1, 5, 9, 26, -54, -78});
         DiscussionArray testTwo = new DiscussionArray(new double[]{1.0, 5.1, 9.2, 26.3, -54.4, -78.5, 84.6, -79.7});
 
-        // print the results of the who arrays
+        // print the results of the two arrays
         testOne.testIntArray();
         System.out.println(); // spacing for aesthetics.
         testTwo.testDoubleArray();
