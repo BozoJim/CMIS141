@@ -11,7 +11,7 @@ import java.util.Objects;
 
 public class CoffeePot {
     private String strength;
-    private String power = "off";
+    private boolean power = false;
     private int creme, sugar;
     private boolean complete;
 
@@ -39,12 +39,12 @@ public class CoffeePot {
         }
     }
 
-    public String getPower() {
+    public boolean getPower() {
         return power;
     }
 
-    public void setPower(String power) {
-        if (!Objects.equals(power, "on")) {
+    public void setPower(boolean power) {
+        if (!power) {
             System.out.println("Please turn the power on to begin your coffee.");
         } else {
             this.power = power;
@@ -72,7 +72,7 @@ public class CoffeePot {
     }
 
     public void makeCoffee() {
-        if (!Objects.equals(power, "on")) {
+        if (!power) {
             System.out.println("It's not doing anything.... Is it plugged in?");
         } else {
             coffeeComplete();
@@ -99,7 +99,7 @@ public class CoffeePot {
     public String toString() {
         return "CoffeePot{" +
                 "strength='" + strength + '\'' +
-                ", power='" + power + '\'' +
+                ", power='" + (power ? "on" : "off") + '\'' +
                 ", creme=" + creme +
                 ", sugar=" + sugar +
                 ", complete=" + complete +

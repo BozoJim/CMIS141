@@ -31,9 +31,9 @@ class CoffeePotTest {
     void setPower() {
         System.out.println("setPower()");
         System.out.println(defaultCoffee.getPower());
-        defaultCoffee.setPower("fred");
+        defaultCoffee.setPower(false);
         System.out.println(defaultCoffee.getPower());
-        defaultCoffee.setPower("on");
+        defaultCoffee.setPower(true);
         System.out.println(defaultCoffee.getPower());
     }
 
@@ -48,15 +48,20 @@ class CoffeePotTest {
     @Test
     void makeCoffee() {
         System.out.println("makeCoffee():");
+
         // test the no-argument constructor
         System.out.println("\ndefaultCoffee:");
+        System.out.println(defaultCoffee.toString());
         defaultCoffee.makeCoffee(); // fails due to power being off
-        defaultCoffee.setPower("on");
+        defaultCoffee.setPower(true);
+        System.out.println(defaultCoffee.toString());
         defaultCoffee.makeCoffee();
 
         // test the second constructor
         System.out.println("\ncoffeeOne:");
-        coffeeOne.setPower("on");
+        coffeeOne.setPower(false);
+        coffeeOne.setPower(true);
+        System.out.println(coffeeOne.toString());
         coffeeOne.makeCoffee();
     }
 
