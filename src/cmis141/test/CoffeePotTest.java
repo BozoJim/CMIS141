@@ -1,28 +1,34 @@
 package cmis141.test;
 
 import cmis141.week6.CoffeePot;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Scanner;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 /**
- * Created by jstok on 7/28/2017.
+ * File: CoffeePotTest.java
+ * Author: James Stokes
+ * Date: 07-27-2017
+ * Purpose: Construct two coffee pots with different inputs and test the output of each.
  */
+
 class CoffeePotTest {
 
     Scanner input = new Scanner(System.in);
 
-    CoffeePot defaultCoffee = new CoffeePot();
-    CoffeePot coffeeOne = new CoffeePot("mild",2,2);
+    // create two coffee pots
+    private CoffeePot defaultCoffee = new CoffeePot();
+    private CoffeePot coffeeOne = new CoffeePot("mild", 1, 0);
 
     @Test
     void setStrength() {
+        // test the strength of each
         System.out.println("setStrength():");
         System.out.println(defaultCoffee.getStrength());
-        System.out.println(coffeeOne.getStrength());
+        defaultCoffee.setStrength("strong"); // should not work
+        System.out.println(defaultCoffee.getStrength());
+        defaultCoffee.setStrength("dark"); // should be accepted
+        System.out.println(defaultCoffee.getStrength());
     }
 
     @Test
@@ -30,6 +36,8 @@ class CoffeePotTest {
         System.out.println("setPower()");
         System.out.println(defaultCoffee.getPower());
         defaultCoffee.setPower("fred");
+        System.out.println(defaultCoffee.getPower());
+        defaultCoffee.setPower("on");
         System.out.println(defaultCoffee.getPower());
     }
 
@@ -44,11 +52,16 @@ class CoffeePotTest {
     @Test
     void makeCoffee() {
         System.out.println("makeCoffee():");
-        defaultCoffee.makeCoffee(defaultCoffee.getPower());
-        defaultCoffee.setPower("fred");
-        defaultCoffee.makeCoffee(defaultCoffee.getPower());
+        // test the no-argument constructor
+        System.out.println("\ndefaultCoffee:");
+        defaultCoffee.makeCoffee(); // fails due to power being off
         defaultCoffee.setPower("on");
-        defaultCoffee.makeCoffee(defaultCoffee.getPower());
+        defaultCoffee.makeCoffee();
+
+        // test the second constructor
+        System.out.println("\ncoffeeOne:");
+        coffeeOne.setPower("on");
+        coffeeOne.makeCoffee();
     }
 
 }

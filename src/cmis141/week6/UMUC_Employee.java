@@ -13,27 +13,6 @@ public class UMUC_Employee {
         this.hoursWorked = hoursWorked;
     }
 
-    public double getPayRate() {
-        return payRate;
-    }
-
-    private void setPayRate(double payRate) {
-        this.payRate = payRate;
-    }
-
-    public double getHoursWorked() {
-        return hoursWorked;
-    }
-
-    private void setHoursWorked(double hoursWorked) {
-        this.hoursWorked = hoursWorked;
-    }
-
-    private double calculatePay(){
-        pay = payRate * hoursWorked;
-        return pay;
-    }
-
     public static void main(String[] args) {
         UMUC_Employee jane = new UMUC_Employee();
         UMUC_Employee tom = new UMUC_Employee();
@@ -50,5 +29,26 @@ public class UMUC_Employee {
         System.out.println("Tom is owed " + pay);
 
 
+    }
+
+    public double getPayRate() {
+        return payRate;
+    }
+
+    private void setPayRate(double payRate) {
+        this.payRate = payRate;
+    }
+
+    public double getHoursWorked() {
+        return hoursWorked;
+    }
+
+    private void setHoursWorked(double hoursWorked) {
+        this.hoursWorked = hoursWorked;
+    }
+
+    private double calculatePay() {
+        pay = payRate * hoursWorked;
+        return pay;
     }
 }

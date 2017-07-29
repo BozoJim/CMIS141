@@ -10,7 +10,6 @@ package cmis141.week5;
  */
 
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
 
 public class DiscussionArray {
     // initialize array variables
@@ -26,6 +25,18 @@ public class DiscussionArray {
     private DiscussionArray(double[] array) {
         this.myDoubleArray = array;
     }
+
+    // main method. simply printing the values due to constructor error when using a proper @Test.
+    public static void main(String[] args) {
+        // create two DiscussionArrays for testing
+        DiscussionArray testOne = new DiscussionArray(new int[]{1, 5, 9, 26, -54, -78});
+        DiscussionArray testTwo = new DiscussionArray(new double[]{1.0, 5.1, 9.2, 26.3, -54.4, -78.5, 84.6, -79.7});
+
+        // print the results of the two arrays
+        testOne.testIntArray();
+        System.out.println(); // spacing for aesthetics.
+        testTwo.testDoubleArray();
+    } // end main
 
     // getter and setter for int[]
     private int[] getMyIntArray() {
@@ -88,17 +99,5 @@ public class DiscussionArray {
         System.out.println("Length of myDoubleArray: " + testArray.lengthOfDoubleArray());
         testArray.printDoubleArray();
     }
-
-    // main method. simply printing the values due to constructor error when using a proper @Test.
-    public static void main(String[] args) {
-        // create two DiscussionArrays for testing
-        DiscussionArray testOne = new DiscussionArray(new int[]{1, 5, 9, 26, -54, -78});
-        DiscussionArray testTwo = new DiscussionArray(new double[]{1.0, 5.1, 9.2, 26.3, -54.4, -78.5, 84.6, -79.7});
-
-        // print the results of the two arrays
-        testOne.testIntArray();
-        System.out.println(); // spacing for aesthetics.
-        testTwo.testDoubleArray();
-    } // end main
 
 } // end Discussion Array
