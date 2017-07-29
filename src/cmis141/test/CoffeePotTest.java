@@ -3,8 +3,6 @@ package cmis141.test;
 import cmis141.week6.CoffeePot;
 import org.junit.jupiter.api.Test;
 
-import java.util.Scanner;
-
 /**
  * File: CoffeePotTest.java
  * Author: James Stokes
@@ -13,8 +11,6 @@ import java.util.Scanner;
  */
 
 class CoffeePotTest {
-
-    Scanner input = new Scanner(System.in);
 
     // create two coffee pots
     private CoffeePot defaultCoffee = new CoffeePot();
