@@ -6,7 +6,7 @@ import java.awt.*;
  * File: HeadPhone.java
  * Author: James Stokes
  * Date: 07-28-2017
- * Purpose: Establishes a class to create a headphone which track states such as whether it is plugged in, color,
+ * Purpose: Establishes a class to create a headphone which tracks states such as whether it is plugged in, color,
  * manufacturer, and model.
  */
 
@@ -33,6 +33,7 @@ public class HeadPhone {
         this.headPhoneModel = "T-850";
     }
 
+    // standard constructor
     public HeadPhone(int volume, boolean pluggedIn, String manufacturer, Color headPhoneColor, String headPhoneModel) {
         this.volume = volume;
         this.pluggedIn = pluggedIn;
