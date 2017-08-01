@@ -10,24 +10,6 @@ import java.util.Arrays;
  */
 
 public class RandomNumbers {
-    private int[] RandomInts(int x, int y) {
-        int[] randomArray = new int[x];
-
-        for (int i=0; i<x; i++) {
-            randomArray[i] = (int)(Math.random() * (y+1));
-        }
-        return randomArray;
-    }
-
-    private int[] sortedArray(int[] array) {
-        Arrays.sort(array);
-        return array;
-    }
-
-    private String printRandomNumber(int iteration, int number) {
-        return String.format("Random Int #%2d: %3d", iteration+1, number);
-    }
-
     public static void main(String[] args) {
         // collect variables from command line arguments as x and y.
         int x = Integer.parseInt(args[0]);
@@ -51,5 +33,28 @@ public class RandomNumbers {
             System.out.println(new RandomNumbers().printRandomNumber(i, sortedArray[i]));
         }
 
+    } // end main
+
+    // accepts two numbers, then creates an array for x numbers for 0 to y.
+    private int[] RandomInts(int x, int y) {
+        // initializes the array
+        int[] randomArray = new int[x];
+
+        // for num less than x, add number to array.
+        for (int i = 0; i < x; i++) {
+            randomArray[i] = (int) (Math.random() * (y));
+        }
+        return randomArray;
     }
-}
+
+    // sort any int array received
+    private int[] sortedArray(int[] array) {
+        Arrays.sort(array);
+        return array;
+    }
+
+    // print received numbers
+    private String printRandomNumber(int iteration, int number) {
+        return String.format("Random Int #%2d: %3d", iteration + 1, number);
+    }
+} // end class
