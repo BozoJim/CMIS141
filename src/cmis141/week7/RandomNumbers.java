@@ -5,7 +5,7 @@ import java.util.Arrays;
 /**
  * File: RandomNumbers.java
  * Author: James Stokes
- * Date: 07-31-2017
+ * Date: 8-1-2017
  * Purpose: Construct a class that will produce X random numbers from 0 to Y.
  */
 
@@ -42,7 +42,7 @@ public class RandomNumbers {
 
         // for num less than x, add number to array.
         for (int i = 0; i < x; i++) {
-            randomArray[i] = (int) (Math.random() * (y));
+            randomArray[i] = (int) (Math.random() * (y + 1));
         }
         return randomArray;
     }
