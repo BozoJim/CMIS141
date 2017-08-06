@@ -44,7 +44,7 @@ public class RandomNumbers {
     // checks args to ensure they are ints
     private boolean checkArg(String x) {
         try {
-            Integer.parseInt(x)
+            Integer.parseInt(x);
             return true;
         } catch (Exception e) {
             System.out.println(x + " is not valid. Arguments must be integers.");
