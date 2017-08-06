@@ -1,4 +1,4 @@
-//package cmis141.week7;
+package cmis141.week7;
 
 import java.util.Arrays;
 
@@ -12,11 +12,17 @@ import java.util.Arrays;
 public class RandomNumbers {
     public static void main(String[] args) {
         // collect variables from command line arguments as x and y.
-        int x = Integer.parseInt(args[0]);
-        int y = Integer.parseInt(args[1]);
+        RandomNumbers checkArgs = new RandomNumbers();
 
-        // create an array of random numbers
-        int[] myArray =  new RandomNumbers().RandomInts(x,y);
+        // check if args are valid ints and set them as x and y if passed
+        int x, y;
+        if (checkArgs.checkArg(args[0]) && checkArgs.checkArg(args[1])) {
+            x = Integer.parseInt(args[0]);
+            y = Integer.parseInt(args[1]);
+        } else return;
+
+        // create an array of random x ints from 0 to y.
+        int[] myArray = new RandomNumbers().RandomInts(x, y);
 
         System.out.println("Random Array:");
         // print each random number in the array
@@ -34,6 +40,17 @@ public class RandomNumbers {
         }
 
     } // end main
+
+    // checks args to ensure they are ints
+    private boolean checkArg(String x) {
+        try {
+            Integer.parseInt(x)
+            return true;
+        } catch (Exception e) {
+            System.out.println(x + " is not valid. Arguments must be integers.");
+            return false;
+        }
+    }
 
     // accepts two numbers, then creates an array for x numbers for 0 to y.
     private int[] RandomInts(int x, int y) {
