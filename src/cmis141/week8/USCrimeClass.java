@@ -94,11 +94,14 @@ class USCrimeClass {
     private int desiredColumn(String search) {
         // determine the desired column based on string search.
         int desiredColumn = 1;
+        boolean success = true;
         for (int i = 0; i < columns.get(0).length; i++) {
             if (Objects.equals(columns.get(0)[i], search)) {
                 desiredColumn = i;
             }
+            else success=false;
         }
+        if (!success) System.out.println("Defaulting second column: " + columns.get(0)[1]);
         return desiredColumn;
     }
 
@@ -145,6 +148,23 @@ class USCrimeClass {
         return max;
     }
 
+    Double[] findMin(String search) {
+        int desiredColumn = desiredColumn(search);
+        Double[] min = {Double.valueOf(columns.get(1)[0]), Double.valueOf(columns.get(1)[desiredColumn])};
+
+        ArrayList<Double[]> pg = new ArrayList<>();
+        for (int i = 1; i < columns.size(); i++) {
+            Double year = Double.valueOf(columns.get(i)[0]);
+            Double line = Double.valueOf(columns.get(i)[desiredColumn]);
+            Double[] yearLine;
+            if (i > 1) {
+                Double prevLine = Double.valueOf(columns.get(i - 1)[desiredColumn]);
+                if (line < min[1]) min = new Double[]{year, line};
+            }
+        }
+        return min;
+    }
+
     void printDataArray(String search) {
         pg = getYearAndData(search);
         for (Double[] line : pg.subList(1, pg.size())) {
@@ -159,6 +179,16 @@ class USCrimeClass {
                 "csvFile='" + csvFile + '\'' +
                 ", columns=" + columns +
                 '}';
+    }
+
+    void listColumns() {
+        System.out.println("Choose between the following column choices:");
+
+        String[] crimeColumns = getColumns().get(0);
+        for (int i = 0; i < crimeColumns.length; i++) {
+            System.out.printf("%40.40s  ", crimeColumns[i]);
+            if (i % 4 == 3) System.out.println();
+        }
     }
 
 } // end class
