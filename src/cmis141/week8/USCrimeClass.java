@@ -93,13 +93,15 @@ class USCrimeClass {
 
     private int desiredColumn(String search) {
         // determine the desired column based on string search.
+        search = search.toLowerCase();
         int desiredColumn = 1;
-        boolean success = true;
+        boolean success = false;
         for (int i = 0; i < columns.get(0).length; i++) {
-            if (Objects.equals(columns.get(0)[i], search)) {
+            if (Objects.equals(columns.get(0)[i].toLowerCase(), search)) {
                 desiredColumn = i;
+                success = true;
+                break;
             }
-            else success=false;
         }
         if (!success) System.out.println("Defaulting second column: " + columns.get(0)[1]);
         return desiredColumn;
@@ -182,7 +184,7 @@ class USCrimeClass {
     }
 
     void listColumns() {
-        System.out.println("Choose between the following column choices:");
+        System.out.println("Choose between the following case insensitive column choices:");
 
         String[] crimeColumns = getColumns().get(0);
         for (int i = 0; i < crimeColumns.length; i++) {
