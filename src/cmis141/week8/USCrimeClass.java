@@ -14,78 +14,59 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 class USCrimeClass {
     private String csvFile;
-    private FileReader readFile;
-
-    private BufferedReader bufferedReader;
     private ArrayList<String[]> columns = new ArrayList<>();
+    private ArrayList<Double[]> pg = new ArrayList<>();
 
-    USCrimeClass(String csvFile) throws FileNotFoundException {
-        this.csvFile = csvFile;
-        this.readFile = setReadFile(getCsvFile());
-        this.bufferedReader = setBufferedReader(getReadFile());
-        this.columns = setColumns();
+    USCrimeClass(String csvFile) {
+        this.csvFile = setCsvFile(csvFile);
+        this.columns = createArray();
     }
 
     private String getCsvFile() {
         return csvFile;
     }
 
-    private void setCsvFile(String csvFile) {
-        this.csvFile = csvFile;
-    }
-
-    private FileReader setReadFile(String csvFile) {
-        try (FileReader fileReader = new FileReader(csvFile)) {
-            return fileReader;
-        } catch (FileNotFoundException e) {
-            System.out.println(csvFile + " was not found. Please input a csv file.");
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+    // set the csv
+    private String setCsvFile(String csvFile) {
+        if (csvFile.isEmpty()) {
+            System.out.println("CSV can not be empty.");
         }
-        return null;
+        return csvFile;
     }
 
-    private FileReader getReadFile() {
-        return readFile;
-    }
-
-
-    private BufferedReader setBufferedReader(FileReader fileReader) {
-        return new BufferedReader(fileReader);
-    }
-
-    private BufferedReader getBufferedReader() {
-        return bufferedReader;
-    }
-
-
-    private ArrayList<String[]> setColumns() {
+    private ArrayList<String[]> createArray() {
         String line;
         BufferedReader bufferedReader = null;
 
-        try {
-            bufferedReader = new BufferedReader(new FileReader(csvFile));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        // Ensure csvFile is not empty. A minimum attempt at catching filename errors.
+        if (!csvFile.isEmpty()) {
 
-        try {
-            assert bufferedReader != null;
-            while ((line = bufferedReader.readLine()) != null) {
-                String[] thisLine = line.split(",");
-                //System.out.println(Arrays.toString(thisLine));
-                columns.add(thisLine);
+            // create the buffered reader from
+            try {
+                bufferedReader = new BufferedReader(new FileReader(csvFile));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+
+            try {
+                assert bufferedReader != null;
+                while ((line = bufferedReader.readLine()) != null) {
+                    String[] thisLine = line.split(",");
+                    //System.out.println(Arrays.toString(thisLine));
+                    columns.add(thisLine);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return columns;
     }
 
+    // print an ArrayList.
     void printArray() {
         ArrayList<Integer> widths = getColumnWidths();
 
@@ -99,6 +80,7 @@ class USCrimeClass {
         }
     }
 
+    // find the width of the headers, used for printing the array.
     private ArrayList<Integer> getColumnWidths() {
         ArrayList<Integer> widths = new ArrayList<>();
         String[] get = columns.get(0);
@@ -109,16 +91,72 @@ class USCrimeClass {
         return widths;
     }
 
+    private int desiredColumn(String search) {
+        // determine the desired column based on string search.
+        int desiredColumn = 1;
+        for (int i = 0; i < columns.get(0).length; i++) {
+            if (Objects.equals(columns.get(0)[i], search)) {
+                desiredColumn = i;
+            }
+        }
+        return desiredColumn;
+    }
+
+    // find growths for each year.
+    private ArrayList<Double[]> getYearAndData(String search) {
+        int desiredColumn = desiredColumn(search);
+
+        ArrayList<Double[]> pg = new ArrayList<>();
+        for (int i = 1; i < columns.size(); i++) {
+            Double year = Double.valueOf(columns.get(i)[0]);
+            Double line = Double.valueOf(columns.get(i)[desiredColumn]);
+            Double[] yearLine;
+            if (i > 1) {
+                Double prevValue = Double.valueOf(columns.get(i - 1)[desiredColumn]);
+                yearLine = new Double[]{year, line, ((line - prevValue) / prevValue) * 100};
+                //System.out.println(pg.get(i).toString());
+            } else yearLine = new Double[]{year, line, 0.0};
+
+            //System.out.println(Arrays.toString(yearLine));
+            pg.add(yearLine);
+            //System.out.println(Arrays.toString(pg.get(i)));
+        }
+        return pg;
+    }
+
     ArrayList<String[]> getColumns() {
         return columns;
     }
+
+    Double[] findMax(String search) {
+        int desiredColumn = desiredColumn(search);
+        Double[] max = {Double.valueOf(columns.get(1)[0]), Double.valueOf(columns.get(1)[desiredColumn])};
+
+        ArrayList<Double[]> pg = new ArrayList<>();
+        for (int i = 1; i < columns.size(); i++) {
+            Double year = Double.valueOf(columns.get(i)[0]);
+            Double line = Double.valueOf(columns.get(i)[desiredColumn]);
+            Double[] yearLine;
+            if (i > 1) {
+                Double prevLine = Double.valueOf(columns.get(i - 1)[desiredColumn]);
+                if (line > max[1]) max = new Double[]{year, line};
+            }
+        }
+        return max;
+    }
+
+    void printDataArray(String search) {
+        pg = getYearAndData(search);
+        for (Double[] line : pg.subList(1, pg.size())) {
+            System.out.printf("%4.4s: %.2f%%\n", line[0], line[2]);
+        }
+    }
+
 
     @Override
     public String toString() {
         return "USCrimeClass{" +
                 "csvFile='" + csvFile + '\'' +
-                ", readFile=" + readFile +
-                ", bufferedReader=" + bufferedReader +
                 ", columns=" + columns +
                 '}';
     }
