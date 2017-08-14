@@ -8,7 +8,6 @@ package cmis141.week8;
  */
 
 // import necessary packages
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -19,7 +18,6 @@ import java.util.Objects;
 class USCrimeClass {
     private String csvFile;
     private ArrayList<String[]> columns = new ArrayList<>();
-    private ArrayList<Double[]> pg = new ArrayList<>();
 
     USCrimeClass(String csvFile) {
         this.csvFile = setCsvFile(csvFile);
@@ -56,7 +54,6 @@ class USCrimeClass {
                 assert bufferedReader != null;
                 while ((line = bufferedReader.readLine()) != null) {
                     String[] thisLine = line.split(",");
-                    //System.out.println(Arrays.toString(thisLine));
                     columns.add(thisLine);
                 }
             } catch (IOException e) {
@@ -122,67 +119,57 @@ class USCrimeClass {
                 //System.out.println(pg.get(i).toString());
             } else yearLine = new Double[]{year, line, 0.0};
 
-            //System.out.println(Arrays.toString(yearLine));
             pg.add(yearLine);
-            //System.out.println(Arrays.toString(pg.get(i)));
         }
         return pg;
     }
 
-    ArrayList<String[]> getColumns() {
+    private ArrayList<String[]> getColumns() {
         return columns;
     }
 
+    // find and return the maximum value for the requested column
     Double[] findMax(String search) {
         int desiredColumn = desiredColumn(search);
         Double[] max = {Double.valueOf(columns.get(1)[0]), Double.valueOf(columns.get(1)[desiredColumn])};
 
-        ArrayList<Double[]> pg = new ArrayList<>();
         for (int i = 1; i < columns.size(); i++) {
             Double year = Double.valueOf(columns.get(i)[0]);
             Double line = Double.valueOf(columns.get(i)[desiredColumn]);
-            Double[] yearLine;
+
             if (i > 1) {
-                Double prevLine = Double.valueOf(columns.get(i - 1)[desiredColumn]);
+
                 if (line > max[1]) max = new Double[]{year, line};
             }
         }
         return max;
     }
 
+    // find and return the minimum value for the requested column
     Double[] findMin(String search) {
         int desiredColumn = desiredColumn(search);
         Double[] min = {Double.valueOf(columns.get(1)[0]), Double.valueOf(columns.get(1)[desiredColumn])};
 
-        ArrayList<Double[]> pg = new ArrayList<>();
+
         for (int i = 1; i < columns.size(); i++) {
             Double year = Double.valueOf(columns.get(i)[0]);
             Double line = Double.valueOf(columns.get(i)[desiredColumn]);
-            Double[] yearLine;
             if (i > 1) {
-                Double prevLine = Double.valueOf(columns.get(i - 1)[desiredColumn]);
                 if (line < min[1]) min = new Double[]{year, line};
             }
         }
         return min;
     }
 
+    // simply prints the data in an array.
     void printDataArray(String search) {
-        pg = getYearAndData(search);
+        ArrayList<Double[]> pg = getYearAndData(search);
         for (Double[] line : pg.subList(1, pg.size())) {
             System.out.printf("%4.4s: %.2f%%\n", line[0], line[2]);
         }
     }
 
-
-    @Override
-    public String toString() {
-        return "USCrimeClass{" +
-                "csvFile='" + csvFile + '\'' +
-                ", columns=" + columns +
-                '}';
-    }
-
+    // lists the columns. Used for second decision in main menu.
     void listColumns() {
         System.out.println("Choose between the following case insensitive column choices:");
 
@@ -193,4 +180,11 @@ class USCrimeClass {
         }
     }
 
+    @Override
+    public String toString() {
+        return "USCrimeClass{" +
+                "csvFile='" + csvFile + '\'' +
+                ", columns=" + columns +
+                '}';
+    }
 } // end class
